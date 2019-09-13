@@ -35,6 +35,15 @@
             android:layout_margin="10dp"
             android:id="@+id/custid"
             android:hint="Customer ID"/>
+
+        <EditText
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="amount"
+            android:inputType="textPersonName" />
+
         <Button
             android:layout_width="217dp"
             android:layout_height="wrap_content"

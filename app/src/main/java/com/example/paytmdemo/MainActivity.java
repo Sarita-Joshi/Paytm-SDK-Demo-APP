@@ -25,7 +25,7 @@ import java.util.TreeMap;
 public class MainActivity extends AppCompatActivity {
 
 
-    EditText orderid, custid;
+    EditText orderid, custid,amount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +37,15 @@ public class MainActivity extends AppCompatActivity {
         Button btn = (Button) findViewById(R.id.start_transaction);
         orderid = (EditText) findViewById(R.id.orderid);
         custid = (EditText) findViewById(R.id.custid);
+        amount = (EditText) findViewById(R.id.amount);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, checksum.class);
                 intent.putExtra("orderid", orderid.getText().toString());
                 intent.putExtra("custid", custid.getText().toString());
-                intent.putExtra("final_amount", 100);
-                startActivity(intent);
+                intent.putExtra("final_amount", amount.getText().toString());
+                startActivityForResult(intent,1);
             }
         });
 
