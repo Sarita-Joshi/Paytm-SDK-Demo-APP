@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+//In this file, configure the paytm app with the checksum.php file hosted online. Any free hosting server will do. 
+
 public class checksum extends AppCompatActivity implements PaytmPaymentTransactionCallback {
     String custid = "", orderId = "", mid = "", amount = "";
         int temp = 0;
@@ -35,7 +37,7 @@ public class checksum extends AppCompatActivity implements PaytmPaymentTransacti
             orderId =intent.getExtras().getString("orderid");
             custid = intent.getExtras().getString("custid");
             temp = intent.getIntExtra("final_amount", 1);
-            mid = "YJIkal71410751507130"; /// your merchant id
+            mid = "XXXXXXXXXXXXXXXXXXXX";   /// your merchant id from paytm business account
             sendUserDetailTOServerdd dl = new sendUserDetailTOServerdd();
             //noinspection unchecked
             dl.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -47,8 +49,8 @@ public class checksum extends AppCompatActivity implements PaytmPaymentTransacti
     public class sendUserDetailTOServerdd extends AsyncTask<ArrayList<String>, Void, String> {
         private ProgressDialog dialog = new ProgressDialog(checksum.this);
 
-        String url ="https://much-factors.000webhostapp.com/generateChecksum.php";
-        String verifyurl = "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=" + orderId;
+        String url =""; // provide a link to 'generateChecksum.php' hosted online
+        String verifyurl = "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=" + orderId; //verification 
         String CHECKSUMHASH ="";
         @Override
         protected void onPreExecute() {
@@ -64,7 +66,9 @@ public class checksum extends AppCompatActivity implements PaytmPaymentTransacti
                             "&ORDER_ID=" + orderId+
                             "&CUST_ID="+custid+
                             "&CHANNEL_ID=WAP&TXN_AMOUNT=" + temp + "&WEBSITE=PRODUCTION" +
-                            "&CALLBACK_URL=" + verifyurl + "&INDUSTRY_TYPE_ID=Retail";
+                            "&CALLBACK_URL=" + verifyurl + "&INDUSTRY_TYPE_ID=Retail"; 
+            //these are defalut configurations. You may change them according to your needs.
+            
             JSONObject jsonObject = jsonParser.makeHttpRequest(url,"POST",param);
             if(jsonObject != null){
                 Log.e("CheckSum result >>",jsonObject.toString());
@@ -99,7 +103,7 @@ public class checksum extends AppCompatActivity implements PaytmPaymentTransacti
             paramMap.put("WEBSITE", "PRODUCTION");
             paramMap.put("CALLBACK_URL", verifyurl);
         //paramMap.put( "EMAIL" , "abc@gmail.com");   // no need
-        // paramMap.put( "MOBILE_NO" , "9144040888");  // no need
+        // paramMap.put( "MOBILE_NO" , "9944040888");  // no need
             paramMap.put("CHECKSUMHASH" ,CHECKSUMHASH);
         //paramMap.put("PAYMENT_TYPE_ID" ,"CC");    // no need
             paramMap.put("INDUSTRY_TYPE_ID", "Retail");
